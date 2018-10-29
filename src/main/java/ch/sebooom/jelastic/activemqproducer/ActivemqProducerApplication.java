@@ -38,7 +38,12 @@ public class ActivemqProducerApplication {
 
 	@PostConstruct
 	public void logJmsParams(){
+
 		log.info("Application postConstruct");
+
+		for( Object o : System.getenv().entrySet()  ){
+			log.info("key" + o );
+		}
 	}
 
 
