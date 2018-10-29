@@ -27,7 +27,7 @@ public class JmsConfiguration {
     @Value("${spring.activemq.broker-url}")
     private String JMS_BROKER_URI_PROPS;
 
-    @Value("#{systemEnvironment['broker_uri']}")
+    @Value("#{systemEnvironment['BROKER_URI']}")
     private String JMS_BROKER_URI_ENV;
 
     @Value("${app.activemq.test.queue.name}")
@@ -46,7 +46,7 @@ public class JmsConfiguration {
     public ConnectionFactory connectionFactory(){
         log.info("JMS Broker uri from properties: {}", JMS_BROKER_URI_PROPS);
         log.info("JMS Broker uri from environnement: {}", JMS_BROKER_URI_ENV);
-        log.info("Env broker.uri: {}", System.getProperty("broker_uri"));
+        log.info("Env broker.uri: {}", System.getProperty("BROKER_URI"));
         log.info("Env broker.uri: {}", System.getenv("broker_uri"));
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
