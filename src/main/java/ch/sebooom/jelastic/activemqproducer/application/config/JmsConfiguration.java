@@ -46,7 +46,8 @@ public class JmsConfiguration {
     public ConnectionFactory connectionFactory(){
         log.info("JMS Broker uri from properties: {}", JMS_BROKER_URI_PROPS);
         log.info("JMS Broker uri from environnement: {}", JMS_BROKER_URI_ENV);
-        log.info("Env borker.uri: {}", System.getProperty("broker.uri"));
+        log.info("Env broker.uri: {}", System.getProperty("broker_uri"));
+        log.info("Env broker.uri: {}", System.getenv("broker_uri"));
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
