@@ -1,4 +1,4 @@
-package ch.sebooom.jelastic.activemqproducer.application.web;
+package ch.sebooom.jelastic.activemqproducer.application.web.command;
 
 import lombok.Getter;
 import lombok.ToString;
