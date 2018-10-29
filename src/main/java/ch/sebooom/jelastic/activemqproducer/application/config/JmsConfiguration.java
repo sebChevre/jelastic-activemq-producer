@@ -10,15 +10,11 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-import org.springframework.lang.Nullable;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
-import java.util.Date;
-import java.util.concurrent.ScheduledFuture;
+
 
 @Slf4j
 @Configuration
@@ -27,7 +23,7 @@ public class JmsConfiguration {
     @Value("${spring.activemq.broker-url}")
     private String JMS_BROKER_URI_PROPS;
 
-    @Value("#{systemEnvironment['BROKER_URI']}")
+    @Value("#{systemProperties['BROKER_URI']}")
     private String JMS_BROKER_URI_ENV;
 
     @Value("${app.activemq.test.queue.name}")
@@ -46,8 +42,6 @@ public class JmsConfiguration {
     public ConnectionFactory connectionFactory(){
         log.info("JMS Broker uri from properties: {}", JMS_BROKER_URI_PROPS);
         log.info("JMS Broker uri from environnement: {}", JMS_BROKER_URI_ENV);
-        log.info("Env broker.uri: {}", System.getProperty("BROKER_URI"));
-        log.info("Env broker.uri: {}", System.getenv("BROKER_URI"));
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
