@@ -23,7 +23,7 @@ public class JmsConfiguration {
     @Value("${spring.activemq.broker-url}")
     private String JMS_BROKER_URI_PROPS;
 
-    @Value("#{systemProperties['BROKER_URI']}")
+    @Value("#{systemProperties['broker.uri']}")
     private String JMS_BROKER_URI_ENV;
 
     @Value("${app.activemq.test.queue.name}")
