@@ -35,12 +35,15 @@ public class TestQueueServiceImpl implements TestQueueService {
     @Override
     public void sendMessageToTestQueue(SendTestMessageCommandDto sendTestMessageCommandDto){
         log.info("Sending message to test queue....");
+
         jmsTemplate.convertAndSend(new TestMessage(sendTestMessageCommandDto.getMessage()));
+        log.info("Message send");
     }
 
     @Override
     public void startProcessMessageToTestQueue(){
         log.info("Starting message queue producer process....");
+
         jmsProcessProducerTask.enableJmsMessageProcess();
         executor.scheduleAtFixedRate(jmsProcessProducerTask,1234);
 

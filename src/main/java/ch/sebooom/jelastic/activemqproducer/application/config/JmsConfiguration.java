@@ -20,9 +20,11 @@ import javax.jms.Queue;
 @Configuration
 public class JmsConfiguration {
 
+    //en dev configuration via le fichier de properties
     @Value("${spring.activemq.broker-url}")
     private String JMS_BROKER_URI_PROPS;
 
+    //jelastic configuration via variable d'env
     @Value("#{systemProperties['broker.uri']}")
     private String JMS_BROKER_URI_ENV;
 

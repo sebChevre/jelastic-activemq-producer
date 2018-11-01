@@ -40,7 +40,12 @@ public class JmsProcessProducerTask implements Runnable {
             Thread thread = Thread.currentThread();
 
             log.info("generate message for process: {}", thread.getName());
-            jmsTemplate.convertAndSend(new TestMessage("JMS Process message. Thread: {}" + thread.getName()));
+            try{
+                jmsTemplate.convertAndSend(new TestMessage("JMS Process message. Thread: {}" + thread.getName()));
+            }catch(Exception ex){
+                log.error("Error during sendin message for process. Process stopped now. {}",ex.getMessage());
+                this.enabled = new AtomicBoolean(false);
+            }
 
         }else{
             log.trace("run methode calling but jms message sending disabled");

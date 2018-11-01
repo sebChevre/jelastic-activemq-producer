@@ -4,6 +4,7 @@ package ch.sebooom.jelastic.activemqproducer.application.web;
 import ch.sebooom.jelastic.activemqproducer.application.service.TestQueueService;
 import ch.sebooom.jelastic.activemqproducer.application.web.command.SendTestMessageCommandDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,17 +24,22 @@ public class ProducerController {
 
 
     @PostMapping(value = "/test.q")
-    public void sendTestMessage(@RequestBody SendTestMessageCommandDto sendTestMessageCommandDto) throws JMSException {
+    public ResponseEntity sendTestMessage(@RequestBody SendTestMessageCommandDto sendTestMessageCommandDto) throws JMSException {
         testQueueService.sendMessageToTestQueue(sendTestMessageCommandDto);
+        return ResponseEntity.ok("Message sending to queue test.q");
     }
 
     @PostMapping(value = "/test.q/process")
-    public void startTestMessageProcess(){
+    public ResponseEntity startTestMessageProcess(){
+
         testQueueService.startProcessMessageToTestQueue();
+        return ResponseEntity.ok("Process started...");
     }
 
     @DeleteMapping(value = "/test.q/process")
-    public void stopTestMessageProcess(){
+    public ResponseEntity stopTestMessageProcess(){
+
         testQueueService.stopProcessMessageToTestQueue();
+        return ResponseEntity.ok("Process stoped...");
     }
 }
